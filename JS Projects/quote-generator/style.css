@@ -16,6 +16,4 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: blur(100px);
-  -webkit-filter: blur(100px);
 }
