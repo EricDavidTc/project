@@ -4,32 +4,30 @@ let quoteAuthor = document.querySelector("#author");
 const newQuoteBtn = document.querySelector("#new-quote");
 const tweetBtn = document.querySelector("#twitter");
 const loader = document.querySelector(".loader");
+let apiQuotes = [];
 
-// Show loading
+// New quote
 
-loading = () => {
-  loader.hidden = false;
-  container.hidden = true;
+newQuote = () => {
+  const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
+  console.log(quote.text);
+  quoteLength = quote.text.length;
 };
 
-// Loading complete
+// Get quote from API
 
-complete = () => {
-  container.hidden = false;
-  loader.hidden = true;
-};
+async function getQuote() {
+  const apiUrl = "https://type.fit/api/quotes";
+  try {
+    const response = await fetch(apiUrl);
+    apiQuotes = await response.json();
+    newQuote();
+  } catch (error) {}
+}
 
-//  Get quote
-getQuote = () => {
-  quote = localQuotes[Math.floor(Math.random() * localQuotes.length)];
-};
-
-// Get new quote
 getNewQuote = () => {
-  loading();
   getQuote();
   //define quote length for lon-quote class
-  quoteLength = quote.text.length;
 
   //check if quote length is greater than 55
   if (quoteLength > 55) {
@@ -46,22 +44,7 @@ getNewQuote = () => {
     quoteText.innerHTML = quote.text;
     quoteAuthor.innerHTML = quote.author;
   }
-  complete();
 };
 
-// Tweet a quote
-
-tweet = () => {
-  if (quoteLength < 100) {
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${quote.text} - ${quote.author}`;
-    window.open(twitterUrl, "_blank");
-  } else {
-    quoteText.innerHTML = "Too long to tweet";
-    quoteAuthor.innerHTML = "Quote Generator";
-  }
-};
-
-// activate btns
-newQuoteBtn.addEventListener("click", getNewQuote);
-tweetBtn.addEventListener("click", tweet);
+getQuote();
 getNewQuote();
