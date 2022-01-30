@@ -38,23 +38,23 @@ getNewQuote = () => {
     quoteText.classList.remove("long-quote");
   }
   //check for quote.author = null and assign anonymous as quote.author
-  if (quote.author === null) {
+  if (!quote.author) {
     quote.author = "ANONYMOUS";
-    quoteText.innerHTML = quote.text;
     quoteAuthor.innerHTML = quote.author;
   } else {
-    quoteText.innerHTML = quote.text;
     quoteAuthor.innerHTML = quote.author;
   }
+  // Set Quote, Complete loading
+  quoteText.innerHTML = quote.text;
   complete();
 };
 
 // Tweet a quote
 
 tweet = () => {
-  if (quoteLength < 100) {
+  if (quoteLength < 120) {
     const twitterUrl = `https://twitter.com/intent/tweet?text=${quote.text} - ${quote.author}`;
-    window.open(twitterUrl, "_blank");
+    window.open(twitterUrl);
   } else {
     quoteText.innerHTML = "Too long to tweet";
     quoteAuthor.innerHTML = "Quote Generator";

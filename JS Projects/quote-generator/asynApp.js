@@ -1,22 +1,58 @@
-const container = document.querySelector("#quote-container");
+const quoteContainer = document.querySelector("#quote-container");
 let quoteText = document.querySelector("#quote");
 let quoteAuthor = document.querySelector("#author");
 const newQuoteBtn = document.querySelector("#new-quote");
 const tweetBtn = document.querySelector("#twitter");
-const loader = document.querySelector(".loader");
+const loader = document.querySelector("#loader");
 let apiQuotes = [];
+
+//  Show loading
+
+function loading() {
+  loader.hidden = false;
+  quoteContainer.hidden = true;
+}
+
+// Loading complete
+
+function complete() {
+  loader.hidden = true;
+  quoteContainer.hidden = false;
+}
 
 // New quote
 
 newQuote = () => {
-  const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
-  console.log(quote.text);
-  quoteLength = quote.text.length;
+  loading();
+  quotes = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
+
+  // Check for author name or assign Anonymous if unknown
+
+  if (!quotes.author) {
+    quoteAuthor.textContent = "Anonymous";
+  } else {
+    quoteAuthor.textContent = quotes.author;
+  }
+
+  // check for quote length and add/remove .long-quote
+  xterlength = quotes.text.length;
+
+  if (xterlength > 55) {
+    quoteText.classList.add("long-quote");
+  } else {
+    quoteText.classList.remove("long-quote");
+  }
+
+  // Set quote, Hide loader
+
+  quoteText.textContent = quotes.text;
+  complete();
 };
 
 // Get quote from API
 
 async function getQuote() {
+  loading();
   const apiUrl = "https://type.fit/api/quotes";
   try {
     const response = await fetch(apiUrl);
@@ -25,26 +61,19 @@ async function getQuote() {
   } catch (error) {}
 }
 
-getNewQuote = () => {
-  getQuote();
-  //define quote length for lon-quote class
-
-  //check if quote length is greater than 55
-  if (quoteLength > 55) {
-    quoteText.classList.add("long-quote");
+tweet = () => {
+  if (xterlength < 120) {
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${quotes.text} - ${quotes.author}`;
+    window.open(twitterUrl, "_top");
   } else {
-    quoteText.classList.remove("long-quote");
-  }
-  //check for quote.author = null and assign anonymous as quote.author
-  if (quote.author === null) {
-    quote.author = "ANONYMOUS";
-    quoteText.innerHTML = quote.text;
-    quoteAuthor.innerHTML = quote.author;
-  } else {
-    quoteText.innerHTML = quote.text;
-    quoteAuthor.innerHTML = quote.author;
+    quoteText.innerHTML = "Too long to tweet";
+    quoteAuthor.innerHTML = "Quote Generator";
   }
 };
 
+newQuoteBtn.addEventListener("click", newQuote);
+tweetBtn.addEventListener("click", tweet);
+
+//On Load
+
 getQuote();
-getNewQuote();
