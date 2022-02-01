@@ -56,7 +56,7 @@ quotes = () => {
 
 tweet = () => {
   if (xterlength < 120) {
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${newQuote.quote} - ${newQuote.author}`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${quoteAuthor.textContent}`;
     window.open(twitterUrl, "_top");
   } else {
     quoteText.textContent = "Too long to tweet";
