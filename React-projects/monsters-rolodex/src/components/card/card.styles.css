@@ -1,0 +1,25 @@
+.card-container {
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 32px;
+  background: linear-gradient(145deg, #2f7cb3, #3894d5);
+  box-shadow: 5px 5px 12px #1e4f71, -5px -5px 12px #4ac5ff;
+
+  padding: 25px;
+  cursor: pointer;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+  margin-right: 20px;
+}
+
+.card-container:hover {
+  transform: scale(1.05);
+}
+
+.monster-name {
+  font-family: "Bigelow Rules", cursive;
+  font-size: 2rem;
+}
