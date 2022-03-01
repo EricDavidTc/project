@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 My first React app!What was implemented:
 ▪️component - class and functional component
 ▪️Api call using async and await in data fetching
@@ -8,3 +9,6 @@ My first React app!What was implemented:
 
 
 page link: https://ericdavidtc.github.io/monsterrolodex/
+=======
+
+>>>>>>> @{u}
