@@ -63,13 +63,15 @@ function displayImage() {
   });
 }
 
-window.addEventListener("scroll", () => {
-  if (
-    window.innerHeight + window.scrollY >= document.body.offsetHeight &&
-    ready
-  ) {
-    getPhotos();
-  }
-});
+// window.addEventListener("scroll", () => {
+//   if (
+//     window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+//     ready
+//   ) {
+//     getPhotos();
+//   }
+// });
+
+window.addEventListener("scroll", () => {});
 
 getPhotos();
