@@ -65,11 +65,13 @@ function displayImage() {
 
 window.addEventListener("scroll", () => {
   if (
-    window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+    window.innerHeight + window.pageYOffset >= document.body.offsetHeight &&
     ready
   ) {
     getPhotos();
   }
 });
+
+//use window.pageYOffset instead of window.scrollY because of browser compatibility
 
 getPhotos();
